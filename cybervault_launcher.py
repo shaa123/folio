@@ -1,5 +1,5 @@
 """
-CyberVault Launcher — Cyberpunk-themed Python GUI
+Folio Launcher — Cyberpunk-themed Python GUI
 Merges all Claude branches into main, clones repo if needed,
 installs dependencies, and runs dev/build modes.
 """
@@ -12,8 +12,8 @@ import shutil
 import os
 import sys
 
-REPO_URL = "https://github.com/shaa123/Cybervault2.git"
-REPO_NAME = "Cybervault2"
+REPO_URL = "https://github.com/shaa123/folio.git"
+REPO_NAME = "folio"
 
 # On Windows, commands like npm/git need shell=True to find .cmd/.exe
 IS_WIN = sys.platform == "win32"
@@ -103,10 +103,10 @@ NPM = _find_cmd("npm")
 CARGO = _find_cmd("cargo")
 
 
-class CyberVaultLauncher:
+class FolioLauncher:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("CyberVault Launcher")
+        self.root.title("Folio Launcher")
         self.root.geometry("780x620")
         self.root.configure(bg=BG)
         self.root.resizable(True, True)
@@ -153,7 +153,7 @@ class CyberVaultLauncher:
         title_frame.pack(fill="x")
         title_frame.pack_propagate(False)
         tk.Label(title_frame, text="◆", fg=CYAN, bg=BG2, font=("Consolas", 16)).pack(side="left", padx=(14, 6))
-        tk.Label(title_frame, text="CYBERVAULT LAUNCHER", fg=TEXT, bg=BG2,
+        tk.Label(title_frame, text="FOLIO LAUNCHER", fg=TEXT, bg=BG2,
                  font=("Consolas", 12, "bold")).pack(side="left")
         tk.Label(title_frame, text="v2.0", fg=DIM, bg=BG2,
                  font=("Consolas", 8)).pack(side="left", padx=(8, 0), pady=(4, 0))
@@ -262,7 +262,7 @@ class CyberVaultLauncher:
         self.status_dot.configure(fg=color)
 
     def _browse(self):
-        d = filedialog.askdirectory(title="Select folder where CyberVault2 is (or will be cloned)")
+        d = filedialog.askdirectory(title="Select folder where folio is (or will be cloned)")
         if d:
             # Smart detection: did they pick the repo itself or a parent?
             if os.path.basename(d) == REPO_NAME:
@@ -280,7 +280,7 @@ class CyberVaultLauncher:
         # If empty, open folder picker
         if not p:
             chosen = filedialog.askdirectory(
-                title="Pick the folder where CyberVault2 is (or should be cloned)"
+                title="Pick the folder where folio is (or should be cloned)"
             )
             if not chosen:
                 self._log("Cancelled — no folder selected.", "yellow")
@@ -609,7 +609,7 @@ class CyberVaultLauncher:
                 self.root.after(0, self._log, "", None)
 
                 # Check for exe
-                exe_path = os.path.join(release_dir, "cybervault2.exe" if IS_WIN else "cybervault2")
+                exe_path = os.path.join(release_dir, "folio.exe" if IS_WIN else "folio")
                 if os.path.isfile(exe_path):
                     size_mb = os.path.getsize(exe_path) / (1024 * 1024)
                     self.root.after(0, self._log, f"  EXE: {exe_path}", "cyan")
@@ -650,7 +650,7 @@ class CyberVaultLauncher:
 
     # ── Run ────────────────────────────────────────────
     def run(self):
-        self._log("◆ CyberVault Launcher initialized", "cyan")
+        self._log("◆ Folio Launcher initialized", "cyan")
         self._log(f"  Repo URL: {REPO_URL}", "cyan")
         self._log("", None)
 
@@ -685,4 +685,4 @@ class CyberVaultLauncher:
 
 
 if __name__ == "__main__":
-    CyberVaultLauncher().run()
+    FolioLauncher().run()
